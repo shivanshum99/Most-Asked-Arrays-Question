@@ -1,0 +1,13 @@
+Brute Force Solution: TC: O(n) SC: O(k)
+Optimal Solution: TC: O(2n) SC: O(1)
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k%n;
+
+        reverse(nums.begin(),nums.end()); //O(n)
+        reverse(nums.begin(), nums.begin()+k); //O(n-k) 
+        reverse(nums.begin()+k, nums.end());  //O(k)
+    }
+};
