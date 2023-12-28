@@ -1,0 +1,55 @@
+Brute Force Solution: We can use Linear Search in this, we have to iterate for 0 to n on Array to search missing number
+TC: O(n*n) SC: O(1)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Better Solution: TC: O(2n) SC: O(n)
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int m = n+1;
+        int* flag = new int[m];
+        for (int i = 0; i < m; ++i) {
+            flag[i] = 0;
+        }
+        for(int i = 0;i<n;i++)
+        {
+            flag[nums[i]] = 1;
+        }
+        for(int i = 0;i<m;i++){
+            if(flag[i] == 0)
+            {
+                return i;
+            }
+        }
+        delete flag;
+        return -1;
+  }
+};
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Optimal Solution1: TC: O(n) SC: O(1)
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int totals = (n) * (n + 1) / 2;
+        for (int i = 0; i < n; i++)
+            totals -= nums[i];
+        return totals;
+    }
+};
+
+Optimal Solution2 (more): TC: O(n) SC: O(1)
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int xor1 = 0; int xor2 = 0;
+        for(int i=0;i<n;i++)
+        {
+            xor1 = xor1^nums[i];
+            xor2 = xor2^(i);
+        }
+        xor2 = xor2^n;
+        return xor1^xor2;
+    }
+};
