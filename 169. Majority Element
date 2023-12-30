@@ -1,0 +1,48 @@
+Better Solution: TC: O(NlogN) + O(N) SC: O(N)
+class Solution {
+public:
+    int majorityElement(vector<int>& a) {
+        map<int, int> mpp;
+        for(int i=0;i<a.size();i++){
+            mpp[a[i]]++;
+        }
+        for(auto it: mpp){
+            if(it.second > a.size()/2)
+            {
+                return it.first;
+            }
+        }
+        return -1;
+    }
+};
+------------------------------------------------------------------------------------------------------
+Optimal Solution: TC: O(N) + O(N) SC: O(1)
+class Solution {
+public:
+    int majorityElement(vector<int>& a) {
+        int el;
+        int cnt = 0;
+        for(int i = 0;i<a.size();i++){
+            if(cnt == 0){
+                cnt = 1;
+                el = a[i];
+            }
+            else if(a[i] == el){
+                cnt++;
+            }
+            else{
+                cnt--;
+            }
+        }
+        int cnt1 = 0;
+        for(int i=0;i<a.size();i++){
+            if(el == a[i]){
+                cnt1++;
+            }
+        }
+        if(cnt1 > a.size()/2){
+                return el;
+            }
+        return -1;
+    }
+};
