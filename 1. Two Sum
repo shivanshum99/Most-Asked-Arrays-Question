@@ -1,0 +1,57 @@
+Brute Force Solution: TC:O(N2) SC:O(1) this will give you TLE
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& a, int target) {
+       for(int i =0;i<a.size();i++){
+           for(int j = i+1;j<a.size();j++){
+               int sum = a[i]+a[j];
+               if(sum == target)
+               {
+                   return {i, j};
+               }
+           }
+       }
+       return {-1,-1};
+    }
+};
+-----------------------------------------------------------------------------------------------------------------------------------
+Better Solution: TC: O(NlogN) SC: O(N)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& a, int target) {
+        map<int, int> mpp;
+       for(int i =0;i<a.size();i++){
+           int more = target - a[i];
+           if(mpp.find(more)!=mpp.end()){
+               return{i, mpp[more]};
+           }
+           mpp[a[i]] = i;
+       }
+       return {-1,-1};
+    }
+};
+----------------------------------------------------------------------------------------------------------------------------------------
+Optimal Solution:
+Note: this code will work only when you have to return YES or NO in the answer
+class Solution {
+public:
+    string twoSum(vector<int>& a, int target) {
+        sort(a.begin(), a.end());
+        int l = 0; int r = a.size()-1;
+        while(l<r)
+        {
+            int sum = a[l] + a[r];
+            if(sum == target)
+            {
+                return "YES";
+            }
+            else if(sum > target){
+                r--;
+            }
+            else{
+                l++;
+            }
+        }
+        return "NO";
+    }
+};
