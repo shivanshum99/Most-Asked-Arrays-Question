@@ -1,0 +1,21 @@
+Brute Force Solution: we can do it using 2 for loops to generate all subarrays and check maximum sum in that.
+TC: O(N2) or O(N3) nearly
+SC: O(1)
+-----------------------------------------------------------------------------------------------------------------------------------
+Optimal Solution: (Kadane's Algorithm) TC: O(N) SC: O(1)
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum = 0, maxi = INT_MIN;
+        for(int i=0;i<nums.size();i++){
+            sum += nums[i];
+            if(sum>maxi){
+                maxi = sum;
+            }
+            if(sum<0){
+                sum = 0;
+            }
+        }
+        return maxi;
+    }
+};
