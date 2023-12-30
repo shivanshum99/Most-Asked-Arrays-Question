@@ -17,6 +17,7 @@ public:
 };
 ------------------------------------------------------------------------------------------------------
 Optimal Solution: TC: O(N) + O(N) SC: O(1)
+Note: Moore's Voting Algorithm
 class Solution {
 public:
     int majorityElement(vector<int>& a) {
