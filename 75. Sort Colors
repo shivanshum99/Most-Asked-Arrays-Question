@@ -1,0 +1,59 @@
+Brute Force Solution: Using one of the sorting algorithms TC: NLogN SC: O(N)
+-----------------------------------------------------------------------------------------------
+Better Solution: TC: O(2N)
+class Solution {
+public:
+    void sortColors(vector<int>& a) {
+        int i, j, k;
+        int cntOne =0; int cntZero = 0; int cntTwo = 0;
+        for(int i =0;i<a.size();i++){
+            if(a[i]==0){
+                cntZero++;
+            }
+            else if(a[i] == 1){
+                cntOne++;
+            }
+            else if(a[i]==2){
+                cntTwo++;
+            }
+        }
+        for(int i = 0;i<cntZero;i++)
+        {
+            a[i] = 0;
+        }
+        for(int j = cntZero;j<cntZero+cntOne;j++)
+        {
+            a[j] = 1;
+        }
+        for(k = cntZero+cntOne;k<a.size();k++)
+        {
+            a[k] = 2;
+        }
+    }
+};
+----------------------------------------------------------------------------------------------------------------
+Optimal Solution: (Dutch National Flag Algorithm) TC: O(N) SC: O(1)
+    class Solution {
+    public:
+        void sortColors(vector<int>& a) {
+            int low = 0; int mid = 0; int high = a.size()-1;
+
+            while(mid<=high){
+                if(a[mid]==0)
+                {
+                    swap(a[low], a[mid]);
+                    low++;
+                    mid++;
+                }
+                else if(a[mid]==1){
+                    mid++;
+                }
+                else if(a[mid]==2)
+                {
+                    swap(a[mid], a[high]);
+                    high--;
+                }
+            }
+        }
+    };
+
