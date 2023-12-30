@@ -1,0 +1,50 @@
+Brute Force Solution: TC: O(N2) SC: O(1)
+We can do it using 2 for loops(Generate all possible subarrays)
+-------------------------------------------------------------------------------------------------------------
+Better Solution: TC: NlogN SC: O(N)
+#include<bits/stdc++.h>
+int longestSubarrayWithSumK(vector<int> a, long long k) {
+    map<long long, int>preSum;
+    long long sum  = 0;
+    int maxLen = 0;
+
+    for(int i = 0;i<a.size();i++)
+    {
+        sum += a[i];
+        if(sum == k)
+        {
+            maxLen = max(maxLen, i+1);
+        }
+        long long rem = sum - k;
+        if(preSum.find(rem) != preSum.end()){
+            int len = i - preSum[rem];
+            maxLen = max(maxLen, len);
+        }
+
+        if(preSum.find(sum) == preSum.end())
+        {
+            preSum[sum]=i;
+        }
+    }
+    return maxLen;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Optimal Solution: TC: O(2N) SC: O(1)   worst case
+#include<bits/stdc++.h>
+int longestSubarrayWithSumK(vector<int> a, long long k) {
+    long long sum = 0;
+    int j = 0;
+    int maxLen = 0;
+    for(int i=0;i<a.size();i++)
+    {
+        sum += a[i];
+        while(j<=i && sum > k){
+            sum = sum - a[j];
+            j++;
+        }
+        if(sum == k){
+            maxLen = max(maxLen, i-j+1);
+        }
+    }
+    return maxLen;
+}
