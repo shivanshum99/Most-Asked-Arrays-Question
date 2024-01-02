@@ -1,0 +1,49 @@
+Brute Force Solution: TC: O(2N) SC: O(N)
+
+class Solution {
+public:
+//all +ve elements are on even index
+//all -ve elements are on odd index 
+    vector<int> rearrangeArray(vector<int>& a) {
+        int n = a.size();
+        vector<int>pos;
+        vector<int>neg;
+        int j = 0;int k = 0;
+        for(int i = 0;i<n;i++){
+            if(a[i] > 0){
+              pos.push_back(a[i]); 
+            }
+            else{
+                neg.push_back(a[i]);
+            }
+        }
+        for(int i = 0;i<n/2;i++){
+            a[i*2] = pos[i];
+            a[i*2+1] = neg[i];
+        }
+        return a;
+    }
+};
+------------------------------------------------------------------------------------------------------------------------------
+Optimal Solution: O(N) TC: O(N)(using for returning the answer)
+class Solution {
+public:
+//all +ve elements are on even index
+//all -ve elements are on odd index 
+    vector<int> rearrangeArray(vector<int>& a) {
+        int n = a.size();
+        vector<int> ans(n,0);
+        int j = 0; int k = 1;
+        for(int i=0;i<n;i++){
+            if(a[i]>0){
+                ans[j] = a[i];
+                j = j+2;
+            }
+            else{
+                ans[k] = a[i];
+                k = k+2;
+            }
+        }
+        return ans;
+    }
+};
