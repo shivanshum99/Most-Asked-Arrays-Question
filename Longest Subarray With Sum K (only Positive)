@@ -29,7 +29,7 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
     return maxLen;
 }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Optimal Solution: TC: O(2N) SC: O(1)   worst case
+Optimal Solution: TC: O(2N) SC: O(1)   worst case (two pointer approach)
 #include<bits/stdc++.h>
 int longestSubarrayWithSumK(vector<int> a, long long k) {
     long long sum = 0;
